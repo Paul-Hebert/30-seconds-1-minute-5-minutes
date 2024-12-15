@@ -14,15 +14,12 @@ export default function HomeScreen() {
     <Container>
       <VerticalStack>
         <Heading>30-1-5</Heading>
+        <Text>
+          Sketchercise is a drawing app that helps you practice drawing by
+          sketching scenes from your own photos.
+        </Text>
 
-        {drawings.length === 0 ? (
-          <>
-            <Text>
-              Sketchercise is a drawing app that helps you practice drawing by
-              sketching scenes from your own photos.
-            </Text>
-          </>
-        ) : (
+        {drawings.length > 0 && (
           <>
             <ScrollView style={styles.scrollView}>
               {drawings.map((drawing) => (

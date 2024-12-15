@@ -1,5 +1,4 @@
-
-import {  useState } from "react";
+import { useState } from "react";
 import Heading from "@/components/Heading";
 import { Text } from "@/components/StyledText";
 import { Button } from "@/components/Button";
@@ -36,6 +35,7 @@ export default function AddDrawingScreen() {
   const { hasPermission } = useCamera();
 
   // const durations = [30, 60, 60 * 5];
+  // Uncomment for faster testing of flows
   const durations = [1, 1, 1];
 
   if (hasPermission === null) {
@@ -46,7 +46,7 @@ export default function AddDrawingScreen() {
     return (
       <>
         <Text>No access to camera</Text>
-        <Button variant="secondary" onPress={() => setCurrentStep("30s")}>
+        <Button variant="subtle" onPress={() => setCurrentStep("30s")}>
           Continue without camera
         </Button>
       </>
@@ -63,7 +63,10 @@ export default function AddDrawingScreen() {
     });
 
     if (success) {
-      navigation.navigate("index");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "index" }],
+      });
     }
   };
 
@@ -135,7 +138,7 @@ export default function AddDrawingScreen() {
             the future.
           </Text>
           <Button onPress={handleSave}>Save</Button>
-          <Button variant="secondary" onPress={() => {}}>
+          <Button variant="subtle" onPress={() => {}}>
             No thanks
           </Button>
         </VerticalStack>

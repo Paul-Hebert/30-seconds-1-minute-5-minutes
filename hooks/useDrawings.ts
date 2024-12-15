@@ -18,7 +18,7 @@ export async function saveDrawing(drawing: Omit<Drawing, "createdAt">) {
 
     // Save updated array
     await AsyncStorage.setItem(
-      "drawings",
+      storageId,
       JSON.stringify([...drawings, newDrawing])
     );
 

@@ -40,7 +40,7 @@ export default function DrawingStep({
             </Button>
           )}
 
-          <Button variant="secondary" onPress={onSkip}>
+          <Button variant="subtle" onPress={onSkip}>
             Skip
           </Button>
         </>

@@ -27,7 +27,7 @@ export default function CameraStep({ onPhotoTaken, onSkip }: CameraStepProps) {
           Take Photo
         </Button>
       )}
-      <Button variant="secondary" onPress={onSkip}>
+      <Button variant="subtle" onPress={onSkip}>
         Skip!
       </Button>
     </>
