@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import { Text } from "../components/StyledText";
+import Timer from "@/components/Timer";
 
 export default function AddDrawingScreen() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Add Drawing Screen</Text>
+      <Timer count={30} />
     </View>
   );
 }

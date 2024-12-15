@@ -1,14 +1,12 @@
-import { View, Pressable, StyleSheet } from "react-native";
-import { Text } from "../components/StyledText";
+import { View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
+import { Button } from "@/components/Button";
 
-export default function Index() {
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Link href="/add-drawing" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Add Drawing</Text>
-        </Pressable>
+        <Button onPress={() => {}}>Start Drawing</Button>
       </Link>
     </View>
   );
@@ -19,15 +17,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "#007AFF",
-    padding: 16,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
