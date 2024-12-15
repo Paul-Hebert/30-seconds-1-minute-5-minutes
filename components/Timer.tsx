@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { useEffect, useState } from "react";
 import { Audio } from "expo-av";
 import { useFonts, RobotoMono_700Bold } from "@expo-google-fonts/roboto-mono";
-import Heading from "./Heading";
+import Subhead from "./Subhead";
 
 function formatTime(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
@@ -15,9 +15,16 @@ function formatTime(seconds: number): string {
 type TimerProps = {
   count: number;
   onFinished: () => void;
+  subhead: string;
+  helpText: string;
 };
 
-export default function Timer({ count, onFinished }: TimerProps) {
+export default function Timer({
+  count,
+  onFinished,
+  subhead,
+  helpText,
+}: TimerProps) {
   const [currentTime, setCurrentTime] = useState(count);
   const [isRunning, setIsRunning] = useState(false);
   const [sound, setSound] = useState<Audio.Sound>();
@@ -66,7 +73,13 @@ export default function Timer({ count, onFinished }: TimerProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.count}>{formatTime(currentTime)}</Text>
+      <Text style={styles.count} relativeLineHeight={1}>
+        {formatTime(currentTime)}
+      </Text>
+
+      <Subhead>{subhead}</Subhead>
+      {helpText && <Text style={{ textAlign: "center" }}>{helpText}</Text>}
+
       <Button
         onPress={() => {
           setIsRunning(!isRunning);
@@ -84,7 +97,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   count: {
-    fontSize: 144,
+    fontSize: 100,
     fontFamily: "RobotoMono_700Bold",
   },
 });

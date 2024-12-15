@@ -8,11 +8,10 @@ interface StyledTextProps extends TextProps {
 
 export function Text({
   style,
-  lineHeight = 1.5,
-  relativeLineHeight,
+  relativeLineHeight = 1.4,
   ...otherProps
 }: StyledTextProps) {
-  const color = useThemeColor({}, "text");
+  const color = '#333';
   const fontSize = StyleSheet.flatten(style)?.fontSize || 16;
 
   return (

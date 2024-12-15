@@ -5,29 +5,43 @@ import Heading from "@/components/Heading";
 import { Text } from "@/components/StyledText";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-
+import DrawingStep from "@/components/DrawingStep";
+import CameraStep from "@/components/CameraStep";
 type Step = "photo" | "30s" | "1m" | "5m";
 
 export default function AddDrawingScreen() {
+  const [photo, setPhoto] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<Step>("photo");
 
   return (
     <Container>
       {currentStep === "photo" && (
-        <>
-          <Heading>Let's Get Started!</Heading>
-          <Text>
-            Take a photo of the scene you're going to draw. (Or skip this step!)
-          </Text>
-          <Button onPress={() => {}}>Take Photo</Button>
-          <Button variant="secondary" onPress={() => setCurrentStep("30s")}>
-            Skip!
-          </Button>
-        </>
+        <CameraStep onSkip={() => setCurrentStep("30s")} />
       )}
-      {currentStep === "30s" && <Timer count={30} onFinished={() => {}} />}
-      {currentStep === "1m" && <Timer count={60} onFinished={() => {}} />}
-      {currentStep === "5m" && <Timer count={5 * 60} onFinished={() => {}} />}
+      {currentStep === "30s" && (
+        <DrawingStep
+          subhead="Draw a quick sketch!"
+          helpText="It doesn't have to be pretty. Focus on getting the overall layout figured out."
+          duration={30}
+          onFinished={() => {}}
+        />
+      )}
+      {currentStep === "1m" && (
+        <DrawingStep
+          subhead="Draw a more detailed sketch!"
+          helpText="Don't sweat the details. Just get the main shapes and proportions right."
+          duration={60}
+          onFinished={() => {}}
+        />
+      )}
+      {currentStep === "5m" && (
+        <DrawingStep
+          subhead="Take your time!"
+          helpText="You’ve already drawn your scene twice! You’ve got this."
+          duration={60}
+          onFinished={() => {}}
+        />
+      )}
     </Container>
   );
 }

@@ -12,6 +12,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 16,
-    padding: 32,
+    padding: 24,
   },
 });

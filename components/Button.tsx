@@ -7,19 +7,22 @@ type ButtonProps = {
   variant?: "primary" | "secondary";
 };
 
-export function Button({ onPress, children, variant = "primary" }: ButtonProps) {
+export function Button({
+  onPress,
+  children,
+  variant = "primary",
+}: ButtonProps) {
   return (
-    <Pressable 
-      style={[
-        styles.button, 
-        variant === "secondary" && styles.buttonSecondary
-      ]} 
+    <Pressable
+      style={[styles.button, variant === "secondary" && styles.buttonSecondary]}
       onPress={onPress}
     >
-      <Text style={[
-        styles.buttonText,
-        variant === "secondary" && styles.buttonTextSecondary
-      ]}>
+      <Text
+        style={[
+          styles.buttonText,
+          variant === "secondary" && styles.buttonTextSecondary,
+        ]}
+      >
         {children}
       </Text>
     </Pressable>

@@ -7,9 +7,11 @@ type HeadingProps = {
 
 export default function Heading({ children }: HeadingProps) {
   return (
-    <View>
-      <Text style={styles.heading}>{children}</Text>
-    </View>
+    <>
+      <Text style={styles.heading} relativeLineHeight={1.2}>
+        {children}
+      </Text>
+    </>
   );
 }
 
