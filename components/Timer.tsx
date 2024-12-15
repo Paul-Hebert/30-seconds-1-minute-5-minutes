@@ -50,16 +50,19 @@ export default function Timer({
   }, [sound]);
 
   useEffect(() => {
+    setCurrentTime(count);
+  }, [count]);
+
+  useEffect(() => {
     if (isRunning) {
       const interval = setInterval(() => {
         setCurrentTime((prevTime) => {
-          if (prevTime === 1) {
+          if (prevTime <= 1) {
             setIsRunning(false);
             playSound();
             onFinished();
             return 0;
           }
-
           return prevTime - 1;
         });
       }, 1000);
