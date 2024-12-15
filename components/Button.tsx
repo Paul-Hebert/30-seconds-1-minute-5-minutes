@@ -1,35 +1,43 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Text } from "./StyledText";
+import { Link, RelativePathString } from "expo-router";
 
 type ButtonProps = {
-  onPress: () => void;
+  onPress?: () => void;
   children: React.ReactNode;
+  href?: RelativePathString | ExternalPathString;
   variant?: "primary" | "secondary" | "subtle";
 };
 
 export function Button({
   onPress,
   children,
+  href,
   variant = "primary",
 }: ButtonProps) {
+  const buttonStyles = [
+    styles.button,
+    variant === "secondary" && styles.buttonSecondary,
+    variant === "subtle" && styles.buttonSubtle,
+  ];
+
+  const textStyles = [
+    styles.buttonText,
+    (variant === "secondary" || variant === "subtle") &&
+      styles.buttonTextSecondary,
+  ];
+
+  if (href) {
+    return (
+      <Link href={href} style={buttonStyles}>
+        <Text style={textStyles}>{children}</Text>
+      </Link>
+    );
+  }
+
   return (
-    <Pressable
-      style={[
-        styles.button,
-        variant === "secondary" && styles.buttonSecondary,
-        variant === "subtle" && styles.buttonSubtle,
-      ]}
-      onPress={onPress}
-    >
-      <Text
-        style={[
-          styles.buttonText,
-          (variant === "secondary" || variant === "subtle") &&
-            styles.buttonTextSecondary,
-        ]}
-      >
-        {children}
-      </Text>
+    <Pressable style={buttonStyles} onPress={onPress}>
+      <Text style={textStyles}>{children}</Text>
     </Pressable>
   );
 }
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     minWidth: 120,
     alignItems: "center",
+    justifyContent: "center",
   },
   buttonSecondary: {
     backgroundColor: "transparent",
@@ -49,15 +58,14 @@ const styles = StyleSheet.create({
   },
   buttonSubtle: {
     backgroundColor: "transparent",
+    paddingBlock: 8,
     borderColor: "transparent",
   },
   buttonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  buttonTextSecondary: {
-    color: "#007AFF",
+    textAlign: "center",
   },
   buttonTextSecondary: {
     color: "#007AFF",

@@ -8,27 +8,43 @@ export default function Preview({
   firstPhoto,
   secondPhoto,
   thirdPhoto,
-  activeStep
+  activeStep,
 }: {
   referencePhoto: string | null;
   firstPhoto: string | null;
   secondPhoto: string | null;
   thirdPhoto: string | null;
-  activeStep: Step
+  activeStep: Step;
 }) {
   return (
     <View
       style={{
         display: "flex",
         flexDirection: "row",
-        gap: 10,
+        gap: 4,
         alignItems: "center",
       }}
     >
-      <PreviewImage uri={referencePhoto} placeholder="Photo" isActive={activeStep === "photo"}/>
-      <PreviewImage uri={firstPhoto} placeholder="30 s" isActive={activeStep === "30s"} />
-      <PreviewImage uri={secondPhoto} placeholder="1 min" isActive={activeStep === "1m"}/>
-      <PreviewImage uri={thirdPhoto} placeholder="5 min" isActive={activeStep === "5m"}/>
+      <PreviewImage
+        uri={referencePhoto}
+        placeholder="Photo"
+        isActive={activeStep === "photo"}
+      />
+      <PreviewImage
+        uri={firstPhoto}
+        placeholder="30 s"
+        isActive={activeStep === "30s"}
+      />
+      <PreviewImage
+        uri={secondPhoto}
+        placeholder="1 min"
+        isActive={activeStep === "1m"}
+      />
+      <PreviewImage
+        uri={thirdPhoto}
+        placeholder="5 min"
+        isActive={activeStep === "5m"}
+      />
     </View>
   );
 }

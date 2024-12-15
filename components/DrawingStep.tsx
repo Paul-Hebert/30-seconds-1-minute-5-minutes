@@ -10,16 +10,14 @@ export default function DrawingStep({
   subhead,
   helpText = "",
   onPhotoTaken,
-  onSkip,
 }: {
   duration: number;
   subhead: string;
   helpText: string;
   onPhotoTaken: (uri: string) => void;
-  onSkip: () => void;
 }) {
   const [timeIsUp, setTimeIsUp] = useState(false);
-  const { hasPermission, takePhoto } = useCamera();
+  const { takePhoto } = useCamera();
 
   return (
     <>
@@ -29,19 +27,13 @@ export default function DrawingStep({
 
           <Subhead>Take a photo of your drawing to remember it later!</Subhead>
 
-          {hasPermission && (
-            <Button
-              onPress={async () => {
-                const uri = await takePhoto();
-                if (uri && onPhotoTaken) onPhotoTaken(uri);
-              }}
-            >
-              Take Photo
-            </Button>
-          )}
-
-          <Button variant="subtle" onPress={onSkip}>
-            Skip
+          <Button
+            onPress={async () => {
+              const uri = await takePhoto();
+              if (uri && onPhotoTaken) onPhotoTaken(uri);
+            }}
+          >
+            Take Photo
           </Button>
         </>
       ) : (

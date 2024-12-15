@@ -50,23 +50,23 @@ export default function Timer({
   }, [sound]);
 
   useEffect(() => {
-    setCurrentTime(count);
-  }, [count]);
-
-  useEffect(() => {
     if (isRunning) {
       const interval = setInterval(async () => {
         if (currentTime <= 1) {
           setIsRunning(false);
           await playSound();
           onFinished();
+          clearInterval(interval);
         }
-        setCurrentTime(currentTime - 1);
+
+        const newTime = currentTime - 1;
+
+        setCurrentTime(newTime);
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isRunning]);
+  }, [isRunning, currentTime]);
 
   if (!loaded) {
     return null;
@@ -88,6 +88,10 @@ export default function Timer({
       >
         {isRunning ? "Pause" : "Go!"}
       </Button>
+
+      {/* <Button variant="subtle" onPress={onFinished}>
+        Finish Early
+      </Button> */}
     </View>
   );
 }

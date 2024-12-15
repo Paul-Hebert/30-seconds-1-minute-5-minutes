@@ -34,10 +34,6 @@ export default function AddDrawingScreen() {
 
   const { hasPermission } = useCamera();
 
-  // const durations = [30, 60, 60 * 5];
-  // Uncomment for faster testing of flows
-  const durations = [1, 1, 1];
-
   if (hasPermission === null) {
     return <Text>Requesting camera permission...</Text>;
   }
@@ -45,13 +41,20 @@ export default function AddDrawingScreen() {
   if (hasPermission === false) {
     return (
       <>
-        <Text>No access to camera</Text>
-        <Button variant="subtle" onPress={() => setCurrentStep("30s")}>
-          Continue without camera
-        </Button>
+        <Text>
+          Access to the camera is required for the application to work. This
+          allows you to store your photos. They are stored locally.
+        </Text>
       </>
     );
   }
+
+  const navigateHome = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "index" }],
+    });
+  };
 
   const handleSave = async () => {
     const success = await saveDrawing({
@@ -63,10 +66,7 @@ export default function AddDrawingScreen() {
     });
 
     if (success) {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "index" }],
-      });
+      navigateHome();
     }
   };
 
@@ -87,8 +87,7 @@ export default function AddDrawingScreen() {
             <DrawingStep
               subhead="Draw a quick sketch!"
               helpText="It doesn't have to be pretty. Focus on getting the overall layout figured out."
-              duration={durations[0]}
-              onSkip={() => setCurrentStep("1m")}
+              duration={30}
               onPhotoTaken={(uri) => {
                 setFirstDrawing(uri);
                 setCurrentStep("1m");
@@ -99,8 +98,7 @@ export default function AddDrawingScreen() {
             <DrawingStep
               subhead="Draw a more detailed sketch!"
               helpText="Don't sweat the details. Just get the main shapes and proportions right."
-              duration={durations[1]}
-              onSkip={() => setCurrentStep("5m")}
+              duration={60}
               onPhotoTaken={(uri) => {
                 setSecondDrawing(uri);
                 setCurrentStep("5m");
@@ -111,8 +109,7 @@ export default function AddDrawingScreen() {
             <DrawingStep
               subhead="Take your time!"
               helpText="You’ve already drawn your scene twice! You’ve got this."
-              duration={durations[2]}
-              onSkip={() => setCurrentStep("5m")}
+              duration={60 * 5}
               onPhotoTaken={(uri) => {
                 setThirdDrawing(uri);
                 setCurrentStep("review");
@@ -138,7 +135,7 @@ export default function AddDrawingScreen() {
             the future.
           </Text>
           <Button onPress={handleSave}>Save</Button>
-          <Button variant="subtle" onPress={() => {}}>
+          <Button variant="subtle" onPress={navigateHome}>
             No thanks
           </Button>
         </VerticalStack>

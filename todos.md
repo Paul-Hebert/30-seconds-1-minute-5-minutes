@@ -1,2 +1,4 @@
 - Better "timer end" sound
 - Fix error about Pressable in Link
+- Option to delete drawings
+- Option to add titles to drawings

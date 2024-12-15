@@ -15,28 +15,24 @@ export default function HomeScreen() {
       <VerticalStack>
         <Heading>30-1-5</Heading>
         <Text>
-          Sketchercise is a drawing app that helps you practice drawing by
-          sketching scenes from your own photos.
+          This is a drawing app that helps you practice drawing by doing timed
+          sets of sketches in 30 seconds, 1 minute, and 5 minutes.
         </Text>
 
         {drawings.length > 0 && (
-          <>
-            <ScrollView style={styles.scrollView}>
-              {drawings.map((drawing) => (
-                <View key={drawing.id} style={styles.drawingItem}>
-                  <Text>
-                    Drawing from{" "}
-                    {new Date(drawing.createdAt).toLocaleDateString()}
-                  </Text>
-                </View>
-              ))}
-            </ScrollView>
-          </>
+          <ScrollView style={styles.scrollView}>
+            {drawings.map((drawing) => (
+              <View key={drawing.id} style={styles.drawingItem}>
+                <Text>
+                  Drawing from{" "}
+                  {new Date(drawing.createdAt).toLocaleDateString()}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
         )}
 
-        <Link href="/add-drawing" asChild>
-          <Button onPress={() => {}}>New Drawing</Button>
-        </Link>
+        <Button href="/add-drawing">New Drawing</Button>
       </VerticalStack>
     </Container>
   );
