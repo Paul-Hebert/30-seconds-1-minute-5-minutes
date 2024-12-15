@@ -10,13 +10,20 @@ import CameraStep from "@/components/CameraStep";
 type Step = "photo" | "30s" | "1m" | "5m";
 
 export default function AddDrawingScreen() {
-  const [photo, setPhoto] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<Step>("photo");
+
+  const [referencePhoto, setReferencePhoto] = useState<string | null>(null);
+  const [firstDrawing, setFirstDrawing] = useState<string | null>(null);
+  const [secondDrawing, setSecondDrawing] = useState<string | null>(null);
+  const [thirdDrawing, setThirdDrawing] = useState<string | null>(null);
 
   return (
     <Container>
       {currentStep === "photo" && (
-        <CameraStep onSkip={() => setCurrentStep("30s")} />
+        <CameraStep
+          onSkip={() => setCurrentStep("30s")}
+          onPhotoTaken={setReferencePhoto}
+        />
       )}
       {currentStep === "30s" && (
         <DrawingStep
