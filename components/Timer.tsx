@@ -55,17 +55,15 @@ export default function Timer({
 
   useEffect(() => {
     if (isRunning) {
-      const interval = setInterval(() => {
-        setCurrentTime((prevTime) => {
-          if (prevTime <= 1) {
-            setIsRunning(false);
-            playSound();
-            onFinished();
-            return 0;
-          }
-          return prevTime - 1;
-        });
+      const interval = setInterval(async () => {
+        if (currentTime <= 1) {
+          setIsRunning(false);
+          await playSound();
+          onFinished();
+        }
+        setCurrentTime(currentTime - 1);
       }, 1000);
+
       return () => clearInterval(interval);
     }
   }, [isRunning]);

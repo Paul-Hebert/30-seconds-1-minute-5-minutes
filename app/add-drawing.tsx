@@ -1,6 +1,5 @@
-import { View } from "react-native";
-import Timer from "@/components/Timer";
-import { useState } from "react";
+
+import {  useState } from "react";
 import Heading from "@/components/Heading";
 import { Text } from "@/components/StyledText";
 import { Button } from "@/components/Button";
@@ -10,10 +9,23 @@ import CameraStep from "@/components/CameraStep";
 import { useCamera } from "@/hooks/useCamera";
 import Preview from "@/components/Preview";
 import { VerticalStack } from "@/components/VerticalStack";
+import { nanoid } from "nanoid/non-secure";
+import { saveDrawing } from "@/hooks/useDrawings";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+  index: undefined;
+  "add-drawing": undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export type Step = "photo" | "30s" | "1m" | "5m" | "review";
 
 export default function AddDrawingScreen() {
+  const navigation = useNavigation<NavigationProp>();
+
   const [currentStep, setCurrentStep] = useState<Step>("photo");
 
   const [referencePhoto, setReferencePhoto] = useState<string | null>(null);
@@ -40,6 +52,20 @@ export default function AddDrawingScreen() {
       </>
     );
   }
+
+  const handleSave = async () => {
+    const success = await saveDrawing({
+      id: nanoid(),
+      referencePhoto,
+      firstDrawing,
+      secondDrawing,
+      thirdDrawing,
+    });
+
+    if (success) {
+      navigation.navigate("index");
+    }
+  };
 
   return (
     <Container style={{ justifyContent: "space-around" }}>
@@ -108,7 +134,7 @@ export default function AddDrawingScreen() {
             When you're ready, save your drawing so you can look back on it in
             the future.
           </Text>
-          <Button onPress={() => {}}>Save</Button>
+          <Button onPress={handleSave}>Save</Button>
           <Button variant="secondary" onPress={() => {}}>
             No thanks
           </Button>
