@@ -1,9 +1,30 @@
 import { Text as RNText, TextProps, StyleSheet } from "react-native";
 import { useThemeColor } from "../hooks/useThemeColor";
 
-export function Text(props: TextProps) {
-  const { style, ...otherProps } = props;
-  const color = useThemeColor({}, "text");
+interface StyledTextProps extends TextProps {
+  lineHeight?: number;
+  relativeLineHeight?: number;
+}
 
-  return <RNText style={[{ color }, style]} {...otherProps} />;
+export function Text({
+  style,
+  lineHeight = 1.5,
+  relativeLineHeight,
+  ...otherProps
+}: StyledTextProps) {
+  const color = useThemeColor({}, "text");
+  const fontSize = StyleSheet.flatten(style)?.fontSize || 16;
+
+  return (
+    <RNText
+      style={[
+        {
+          color,
+          lineHeight: fontSize * (relativeLineHeight || 1.4),
+        },
+        style,
+      ]}
+      {...otherProps}
+    />
+  );
 }

@@ -15,7 +15,7 @@ export default function Heading({ children }: HeadingProps) {
 
 const styles = StyleSheet.create({
   heading: {
-    fontSize: 48,
+    fontSize: 36,
     fontWeight: "bold",
   },
 });
