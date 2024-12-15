@@ -1,17 +1,20 @@
 import { View } from "react-native";
 
 import PreviewImage from "./PreviewImage";
+import { Step } from "@/app/add-drawing";
 
 export default function Preview({
   referencePhoto,
   firstPhoto,
   secondPhoto,
   thirdPhoto,
+  activeStep
 }: {
   referencePhoto: string | null;
   firstPhoto: string | null;
   secondPhoto: string | null;
   thirdPhoto: string | null;
+  activeStep: Step
 }) {
   return (
     <View
@@ -22,10 +25,10 @@ export default function Preview({
         alignItems: "center",
       }}
     >
-      <PreviewImage uri={referencePhoto} placeholder="Photo" />
-      <PreviewImage uri={firstPhoto} placeholder="30 s" />
-      <PreviewImage uri={secondPhoto} placeholder="1 min" />
-      <PreviewImage uri={thirdPhoto} placeholder="5 min" />
+      <PreviewImage uri={referencePhoto} placeholder="Photo" isActive={activeStep === "photo"}/>
+      <PreviewImage uri={firstPhoto} placeholder="30 s" isActive={activeStep === "30s"} />
+      <PreviewImage uri={secondPhoto} placeholder="1 min" isActive={activeStep === "1m"}/>
+      <PreviewImage uri={thirdPhoto} placeholder="5 min" isActive={activeStep === "5m"}/>
     </View>
   );
 }

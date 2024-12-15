@@ -4,16 +4,20 @@ import { Text } from "./StyledText";
 export default function PreviewImage({
   uri,
   placeholder,
+  isActive,
 }: {
   uri: string | null;
   placeholder: string;
+  isActive?: boolean;
 }) {
+  const activeStyles = isActive ? styles.active : {};
+
   return (
     <>
       {uri ? (
-        <Image source={{ uri }} style={styles.shared} />
+        <Image source={{ uri }} style={[styles.shared, activeStyles]} />
       ) : (
-        <View style={[styles.placeholder, styles.shared]}>
+        <View style={[styles.placeholder, styles.shared, activeStyles]}>
           <Text style={styles.inner}>{placeholder}</Text>
         </View>
       )}
@@ -40,5 +44,9 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#ccc",
     color: "#333",
+  },
+  active: {
+    backgroundColor: "#c3dcf7",
+    borderColor: "#007AFF",
   },
 });

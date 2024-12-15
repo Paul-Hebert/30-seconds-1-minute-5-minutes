@@ -11,7 +11,7 @@ import { useCamera } from "@/hooks/useCamera";
 import Preview from "@/components/Preview";
 import { VerticalStack } from "@/components/VerticalStack";
 
-type Step = "photo" | "30s" | "1m" | "5m" | "review";
+export type Step = "photo" | "30s" | "1m" | "5m" | "review";
 
 export default function AddDrawingScreen() {
   const [currentStep, setCurrentStep] = useState<Step>("photo");
@@ -98,6 +98,7 @@ export default function AddDrawingScreen() {
         firstPhoto={firstDrawing}
         secondPhoto={secondDrawing}
         thirdPhoto={thirdDrawing}
+        activeStep={currentStep}
       />
 
       {currentStep === "review" && (
