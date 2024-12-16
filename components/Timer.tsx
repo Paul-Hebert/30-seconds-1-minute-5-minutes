@@ -42,6 +42,10 @@ export default function Timer({
   }
 
   useEffect(() => {
+    Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+    });
+
     return sound
       ? () => {
           sound.unloadAsync();
@@ -53,10 +57,9 @@ export default function Timer({
     if (isRunning) {
       const interval = setInterval(async () => {
         if (currentTime <= 1) {
-          setIsRunning(false);
           await playSound();
+          setCurrentTime(0);
           onFinished();
-          clearInterval(interval);
         }
 
         const newTime = currentTime - 1;
@@ -89,9 +92,9 @@ export default function Timer({
         {isRunning ? "Pause" : "Go!"}
       </Button>
 
-      {/* <Button variant="subtle" onPress={onFinished}>
-        Finish Early
-      </Button> */}
+      <Button variant="subtle" onPress={onFinished}>
+        I'm done early!
+      </Button>
     </View>
   );
 }

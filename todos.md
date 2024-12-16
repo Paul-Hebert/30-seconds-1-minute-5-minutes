@@ -1,4 +1,5 @@
 - Better "timer end" sound
-- Fix error about Pressable in Link
+- Use link for navigation in index.
 - Option to delete drawings
 - Option to add titles to drawings
+- Clean up sounds/audio code

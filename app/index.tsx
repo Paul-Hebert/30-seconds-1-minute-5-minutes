@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View, Image } from "react-native";
 import { Link, useNavigation } from "expo-router";
 import { Button } from "@/components/Button";
 import Heading from "@/components/Heading";
@@ -30,14 +30,23 @@ export default function HomeScreen() {
         {drawings.length > 0 && (
           <>
             <ScrollView style={styles.scrollView}>
-              {drawings.map((drawing) => (
-                <View key={drawing.id} style={styles.drawingItem}>
-                  <Text>
-                    Drawing from{" "}
-                    {new Date(drawing.createdAt).toLocaleDateString()}
-                  </Text>
-                </View>
-              ))}
+              {drawings.map((drawing) => {
+                console.log(drawing);
+                return (
+                  <View key={drawing.id}>
+                    {/* TODO: make full width + scaling */}
+                    <Image
+                      source={{ uri: drawing.thirdDrawing }}
+                      style={{ width: 300, height: 400 }}
+                      resizeMode="cover"
+                    />
+                    <Text>
+                      Drawing from{" "}
+                      {new Date(drawing.createdAt).toLocaleDateString()}
+                    </Text>
+                  </View>
+                );
+              })}
             </ScrollView>
           </>
         )}
@@ -54,10 +63,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   scrollView: {
     width: "100%",
-  },
-  drawingItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    gap: 16,
   },
 });

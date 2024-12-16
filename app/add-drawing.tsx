@@ -57,6 +57,10 @@ export default function AddDrawingScreen() {
   };
 
   const handleSave = async () => {
+    if(!firstDrawing || !secondDrawing || !thirdDrawing) {
+      throw new Error('Missing expected images');
+    }
+    
     const success = await saveDrawing({
       id: nanoid(),
       referencePhoto,
