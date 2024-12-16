@@ -27,14 +27,6 @@ export function Button({
       styles.buttonTextSecondary,
   ];
 
-  if (href) {
-    return (
-      <Link href={href} style={buttonStyles}>
-        <Text style={textStyles}>{children}</Text>
-      </Link>
-    );
-  }
-
   return (
     <Pressable style={buttonStyles} onPress={onPress}>
       <Text style={textStyles}>{children}</Text>
